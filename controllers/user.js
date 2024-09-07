@@ -20,8 +20,12 @@ const SignUp = async (req, res) => {
 const SignIn = async (req, res) => {
   try {
     const { name, email } = req.body;
+    console.log(email)
     const doesExits = await User.findOne({ email });
-    if (!doesExits) return res.status(401).json({ msg: "user not found" });
+    console.log(doesExits)
+    if (!doesExits) {
+      return res.status(401).json({ msg: "user not found" });
+    }
     res.status(201).json({ msg: "user found" });
   } catch (err) {
     console.log(err);
@@ -29,4 +33,4 @@ const SignIn = async (req, res) => {
   }
 };
 
-module.exports = { SignUp,SignIn };
+module.exports = { SignUp, SignIn };
