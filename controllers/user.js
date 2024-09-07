@@ -10,7 +10,7 @@ const SignUp = async (req, res) => {
       contactNumber,
     });
     await user.save();
-    res.status(201).json({ msg: "success", user });
+    res.status(201).json({ msg: "User Registerd Successfully", user });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "Innternal Server Error", err: err.message });
