@@ -10,11 +10,23 @@ const SignUp = async (req, res) => {
       contactNumber,
     });
     await user.save();
-    res.status(201).json({ msg: "User Registerd Successfully", user });
+    res.status(201).json({ msg: "User Registerd", user });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "Innternal Server Error", err: err.message });
   }
 };
 
-module.exports = { SignUp };
+const SignIn = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const doesExits = await User.findOne({ email });
+    if (!doesExits) return res.status(401).json({ msg: "user not found" });
+    res.status(201).json({ msg: "user found" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Internal Server Error", err: err.message });
+  }
+};
+
+module.exports = { SignUp,SignIn };
